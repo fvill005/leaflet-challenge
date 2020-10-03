@@ -24,7 +24,7 @@ L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
           opacity: 1,
           fillOpacity: 1,
           fillColor: getColor(feature.properties.mag),
-          color: "#ffa07a",
+          color: "#00000",
           radius: getRadius(feature.properties.mag),
           stroke: true,
           weight: 0.5
@@ -33,18 +33,18 @@ L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
       // set different color from magnitude
         function getColor(magnitude) {
         switch (true) {
-        case magnitude > 5:
-          return "#8b0000";
-        case magnitude > 4:
-          return "#ff0000";
-        case magnitude > 3:
-          return "#b22222";
-        case magnitude > 2:
-          return "#dc143c";
-        case magnitude > 1:
-          return "#e99667A";
-        default:
-          return "#ff8072";
+            case magnitude > 5:
+                return "#ea2c2c";
+              case magnitude > 4:
+                return "#ea822c";
+              case magnitude > 3:
+                return "#ee9c00";
+              case magnitude > 2:
+                return "#eecc00";
+              case magnitude > 1:
+                return "#d4ee00";
+              default:
+                return "#98ee00";
         }
       }
       // set radius from magnitude
