@@ -6,7 +6,7 @@ var myMap = L.map("map", {
     zoom: 5
 });
 
-
+//insert boilerplate code to display map from mapbox
 L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
     attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
     maxZoom: 18,
@@ -14,8 +14,10 @@ L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
     accessToken: "pk.eyJ1IjoiY2hpYW15YzA5ODciLCJhIjoiY2swdzUxb3I2MGRiMzNpbnliN293OXBteiJ9.at8rk5Trv5oNH1dD2E9EAw"
   }).addTo(myMap);
 
+  //create path for usgs json
   var usgsURL = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
 
+  //call json and set colors for the levels of magnitude 
   d3.json(usgsURL, function(data) {
     function styleInfo(feature) {
         return {
@@ -45,21 +47,21 @@ L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
           return "#ff8072";
         }
       }
-      // set radiuss from magnitude
+      // set radius from magnitude
         function getRadius(magnitude) {
         if (magnitude === 0) {
           return 1;
         }
     
-        return magnitude * 4;
+        return magnitude * 5;
       }
         // GeoJSON layer
         L.geoJson(data, {
-          // Maken cricles
+          // create cricles
           pointToLayer: function(feature, latlng) {
             return L.circleMarker(latlng);
           },
-          // cirecle style
+          // style for the circles
           style: styleInfo,
           // popup for each marker
           onEachFeature: function(feature, layer) {
@@ -67,12 +69,12 @@ L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
           }
         }).addTo(myMap);
       
-        // an object legend
+        // create a legend
         var legend = L.control({
           position: "bottomright"
         });
       
-        // details for the legend
+        // added details for the legend
         legend.onAdd = function() {
           var div = L.DomUtil.create("div", "info legend");
       
@@ -86,7 +88,7 @@ L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
             "#ea2c2c"
           ];
       
-          // Looping through
+          // Loop
           for (var i = 0; i < grades.length; i++) {
             div.innerHTML +=
               "<i style='background: " + colors[i] + "'></i> " +
@@ -95,6 +97,6 @@ L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
           return div;
         };
       
-        // Finally, we our legend to the map.
+        // lastly, add to the map
         legend.addTo(myMap);
   });
