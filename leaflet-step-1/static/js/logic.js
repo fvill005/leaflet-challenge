@@ -70,33 +70,20 @@ L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
         }).addTo(myMap);
       
         // create a legend
-        var legend = L.control({
-          position: "bottomright"
-        });
-      
-        // added details for the legend
+        var legend = L.control({ position: "bottomright" });
         legend.onAdd = function() {
-          var div = L.DomUtil.create("div", "info legend");
-      
-          var grades = [0, 1, 2, 3, 4, 5];
-          var colors = [
-            "#98ee00",
-            "#d4ee00",
-            "#eecc00",
-            "#ee9c00",
-            "#ea822c",
-            "#ea2c2c"
-          ];
-      
-          // Loop
-          for (var i = 0; i < grades.length; i++) {
-            div.innerHTML +=
-              "<i style='background: " + colors[i] + "'></i> " +
-              grades[i] + (grades[i + 1] ? "&ndash;" + grades[i + 1] + "<br>" : "+");
-          }
-          return div;
+            var div = L.DomUtil.create("div", "info legend"), 
+            magnitudeLevels = [0, 1, 2, 3, 4, 5];
+    
+            //div.innerHTML += "<h3>Magnitude</h3>"
+    
+            for (var i = 0; i < magnitudeLevels.length; i++) {
+                div.innerHTML +=
+                    '<i style="background: ' + chooseColor(magnitudeLevels[i] + 1) + '"></i> ' +
+                    magnitudeLevels[i] + (magnitudeLevels[i + 1] ? '&ndash;' + magnitudeLevels[i + 1] + '<br>' : '+');
+            }
+            return div;
         };
-      
-        // lastly, add to the map
+        // Add Legend to the Map
         legend.addTo(myMap);
   });
