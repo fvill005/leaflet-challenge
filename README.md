@@ -1,1 +1,2 @@
 # leaflet-challenge
+In this assignment, we are utilizing our skills using the leaflet library to display a map from a json acquired from the USGS. Our end goal is to have a map that displays markers representing earthquakes and magnitude. The data is pulled from one the USGS jsons made publicly available. In addition to the markers, we are to include a small popup displaying the location and magnitude of an earthquake when clicked on. Lastly, a legend is to be added in order to provide a reference for the markers. 
